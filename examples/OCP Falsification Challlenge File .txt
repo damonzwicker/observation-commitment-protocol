@@ -1,0 +1,21 @@
+# OCP Falsification Challenge
+
+This file is an observation.
+
+Its contents are hashed.
+The digest is committed to a public ledger.
+Anyone can verify the claim independently.
+
+Verification does not depend on the creator of this file.
+Verification does not depend on an API.
+Verification does not depend on the originating system.
+
+The verifier performs only three steps:
+
+recompute → compare → confirm inclusion
+
+If any byte in this file changes, the digest changes.
+
+If the digest changes, verification must fail.
+
+That is the point of OCP.
