@@ -1,6 +1,6 @@
 # Observation Commitment Protocol (OCP)
 
-A minimal primitive for independently verifying that a specific byte sequence was committed to a public ledger.
+A minimal protocol for independently verifying that a specific byte sequence was committed to a public ledger.
 
 Minimal. Verifiable. System-independent.
 
@@ -20,7 +20,9 @@ There is no standard way to verify something **independently**.
 
 ---
 
-## The Model
+## The Protocol
+
+An observation is any byte sequence.
 
 data → digest → public commitment
 
@@ -28,31 +30,37 @@ Verification reduces to:
 
 recompute → compare → confirm inclusion
 
-No API. No trust in the originating system.
+A verifier:
+- recomputes the digest  
+- compares it to the committed value  
+- confirms that the digest exists in a referenced transaction  
+
+No API. No platform dependency. No trust in the originating system.
 
 ---
 
-## What OCP Is
+## What OCP Defines
 
-- A minimal primitive for committing arbitrary data digests  
-- A system-independent verification model  
-- A portable verification boundary  
+- A minimal verification model  
+- A system-independent verification boundary  
+- A portable verification artifact (digest + transaction reference)  
 
 ---
 
-## What OCP Is Not
+## What OCP Does Not Define
 
-- Not storage  
-- Not identity  
-- Not authorship  
-- Not canonical encoding  
-- Not an application framework  
+- storage  
+- identity  
+- authorship  
+- canonical encoding  
+- application-layer semantics  
+- a canonical extraction rule  
 
 ---
 
 ## Why It Matters
 
-OCP separates **truth from systems**.
+OCP separates **verification from systems**.
 
 A verifier does not ask what’s true—  
 they compute it.
@@ -66,24 +74,23 @@ The network only confirms that a commitment exists.
 - 📄 Specification → /docs/spec/ocp-v1.0.0.md  
 - 🔍 Examples → /examples  
 - ⚙️ Contracts → /contracts  
-- 🌐 Live Demo → https://observation-commitment-protocol.vercel.app/
+- 🌐 Live Demo → https://observation-commitment-protocol.vercel.app/  
 
 ---
 
-## Commercial Use
+## Reference Implementation
 
-OCP is released under the MIT License and may be freely implemented.
+VeraFile is the reference implementation of OCP:
 
-VeraFile is the reference implementation and commercial product built on OCP, providing:
+https://github.com/damonzwicker/verafile
 
+It provides:
+- CLI verification  
 - hosted verification  
-- enterprise integrations  
-- production-grade tooling  
+- production tooling  
 
-OCP defines the verification primitive.  
-VeraFile delivers it as a product.
-
-Commercial support and licensing for VeraFile are available.
+OCP defines the protocol.  
+VeraFile implements it.
 
 ---
 
