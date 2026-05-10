@@ -3,10 +3,10 @@
 const fs = require("fs");
 const crypto = require("crypto");
 
-const [, , filePath, proofPath] = process.argv;
+const [, , filePath, proofArg] = process.argv;
 
-if (!filePath || !proofPath) {
-  console.error("Usage: node commit.js <file> <proof.json>");
+if (!filePath) {
+  console.error("Usage: ocp-commit <file> [proof.json]");
   process.exit(1);
 }
 
@@ -14,6 +14,10 @@ if (!fs.existsSync(filePath)) {
   console.error(`ERROR: file not found: ${filePath}`);
   process.exit(1);
 }
+
+const proofPath =
+  proofArg ||
+  filePath.replace(/(\.[^/.]+)?$/, ".proof.json");
 
 const fileBytes = fs.readFileSync(filePath);
 const hash = "0x" + crypto.createHash("sha256").update(fileBytes).digest("hex");
