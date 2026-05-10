@@ -90,6 +90,8 @@ Verification does not depend on the AI system, API, or platform.
 
 It depends only on the bytes.
 
+This is the same scenario demonstrated in the 30-second demo above.
+
 ---
 
 ## The Protocol
