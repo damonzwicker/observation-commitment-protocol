@@ -82,6 +82,18 @@ https://github.com/damonzwicker/verafile
 
 ---
 
+## Quick Verify
+
+Clone the repo and run:
+
+node reference-cli/verify.js examples/example-observation.txt examples/example-proof.ocp.json
+
+Expected output:
+
+VALID: file hash matches proof hash
+
+---
+
 ## Status
 
 v1.0.0 — Initial Specification Release
