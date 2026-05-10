@@ -41,13 +41,13 @@ report.proof.json
 ### 2) Verify (anywhere, later)
 
 ```bash
-npx ocp-verify report.txt report.proof.json
+npx ocp-verify report.txt
 ```
 
 Expected:
 
 ```
-VALID: file hash matches proof hash
+VALID
 ```
 
 If any byte changes:
@@ -56,7 +56,13 @@ If any byte changes:
 INVALID: hash mismatch
 ```
 
-### 3) Use in your system
+### 3) Test tampering (optional)
+
+```bash
+npx ocp-verify tampered.txt report.proof.json
+```
+
+### 4) Use in your system
 
 - Save the file + proof together  
 - Or store the proof alongside records/logs  
@@ -201,12 +207,12 @@ https://github.com/damonzwicker/verafile
 ## Quick Verify
 
 ```bash
-npx ocp-verify examples/example-observation.txt examples/example-proof.ocp.json
+npx ocp-verify examples/example-observation.txt
 ```
 
 Expected output:
 
-VALID: file hash matches proof hash
+VALID
 
 ---
 
