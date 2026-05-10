@@ -1,0 +1,16 @@
+{
+  "name": "ocp-reference-cli",
+  "version": "1.0.0",
+  "description": "Reference CLI for the Observation Commitment Protocol",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "ocp-commit": "reference-cli/commit.js",
+    "ocp-verify": "reference-cli/verify.js"
+  },
+  "files": [
+    "reference-cli",
+    "README.md",
+    "LICENSE"
+  ]
+}
