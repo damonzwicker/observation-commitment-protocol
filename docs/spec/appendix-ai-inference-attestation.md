@@ -71,11 +71,15 @@ input_hash ∈ R(tx)          (using extraction rule evm/event-log)
 
 Verification succeeds iff both conditions hold.
 
-### Reference contract
+### Chain selection
 
-OCP contract on Base Sepolia: `0x0963Fd33DF80c94360F2DC22e5c09517AeE7ED5c`
+OCP is chain-agnostic. The `ObservationCommitment` contract (defined in `appendix-evm-r.md`) can be deployed on any EVM-compatible chain. The reference implementation uses Base Sepolia; production deployments should use a chain appropriate for their finality and cost requirements.
 
-Uses the `ObservationCommitment` reference contract defined in `appendix-evm-r.md`.
+Reference deployment — Base Sepolia: `0x0963Fd33DF80c94360F2DC22e5c09517AeE7ED5c`
+
+The verifier must know which chain to query. Implementations SHOULD include a `l3_chain` field (EIP-155 chain ID) alongside `l3_tx` in the attestation response so verifiers can route to the correct RPC without out-of-band coordination.
+
+Parallel anchoring across multiple chains is valid — each `record(input_hash)` call produces an independent proof. A verifier satisfies L3 if `input_hash ∈ R(tx)` holds on *any* declared chain.
 
 ---
 
@@ -167,11 +171,12 @@ Response shape:
   "output_hash":                "...",
   "manifest_hash":              "...",
   "l4_signature":               "0x...",
-  "l3_tx":                      "0x..."
+  "l3_tx":                      "0x...",
+  "l3_chain":                   84532
 }
 ```
 
-`l3_tx` is the transaction hash of the `record(input_hash)` call on OCP. It MAY be null if L3 anchoring is not configured.
+`l3_tx` is the transaction hash of the `record(input_hash)` call on OCP. `l3_chain` is the EIP-155 chain ID of the chain where the commitment was made. Both MAY be null if L3 anchoring is not configured. Multiple `(l3_tx, l3_chain)` pairs MAY be present if the operator anchors across several chains.
 
 ---
 
