@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// OCP Reference Verifier v2.0.0
+// OCP Reference Verifier v2.1.0
 // Implements: evm/event-log extraction rule
 // Dependencies: zero — Node.js stdlib only (https, crypto, fs)
 // Spec: docs/spec/appendix-evm-r.md
@@ -31,6 +31,11 @@ const NETWORK_TO_CHAIN_ID = {
 // keccak256("Recorded(bytes32,address)")
 // Confirmed from live Base Sepolia transaction logs
 const KNOWN_EVENT_TOPIC = "0xdca60c2087041cbb12d9a57628c6cad28ecbd0437e47c7ab6c3aa6e162bf4497";
+
+// Identity pipeline sentinel hash
+// Canonical identity spec: ipfs://QmTst97dG8i9tFrutdetqMbVhSHqJGJaxMmPzWCcVVTWDU
+// Confirmed independently against Dinamic.eth implementation — locked
+const IDENTITY_PIPELINE_SENTINEL = "8116eec29078e8f57c07077d5e8080a35bde73036581df3abb93755d1b1a16ea";
 
 function fail(message) {
   console.error(`INVALID: ${message}`);
@@ -130,8 +135,8 @@ async function main() {
     for (const field of requiredFields) {
       if (!proof[field]) fail(`missing required field: ${field}`);
     }
-    if (!/^0x[a-f0-9]{64}$/.test(proof.hash))      fail("invalid hash format");
-    if (!/^0x[a-fA-F0-9]{64}$/.test(proof.txHash)) fail("invalid txHash format");
+    if (!/^0x[a-f0-9]{64}$/.test(proof.hash))        fail("invalid hash format");
+    if (!/^0x[a-fA-F0-9]{64}$/.test(proof.txHash))   fail("invalid txHash format");
     if (!/^0x[a-fA-F0-9]{40}$/.test(proof.contract)) fail("invalid contract format");
 
     txHash           = proof.txHash;
