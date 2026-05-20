@@ -1,9 +1,12 @@
 {
-  "name": "ocp-reference-cli",
+  "name": "ocp-verify",
   "version": "1.0.0",
-  "description": "Reference CLI for the Observation Commitment Protocol",
+  "description": "Zero-dependency verifier for the Observation Commitment Protocol — independently verify that a file was committed to a public blockchain",
   "license": "MIT",
   "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "bin": {
     "ocp-commit": "reference-cli/commit.js",
     "ocp-verify": "reference-cli/verify.js"
@@ -12,5 +15,27 @@
     "reference-cli",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "keywords": [
+    "ocp",
+    "observation-commitment-protocol",
+    "blockchain",
+    "verification",
+    "proof",
+    "ethereum",
+    "base",
+    "solana",
+    "ai-verification",
+    "zero-dependency",
+    "cryptography"
+  ],
+  "author": "Damon Zwicker",
+  "homepage": "https://github.com/damonzwicker/observation-commitment-protocol",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damonzwicker/observation-commitment-protocol.git"
+  },
+  "bugs": {
+    "url": "https://github.com/damonzwicker/observation-commitment-protocol/issues"
+  }
 }
