@@ -13,6 +13,26 @@ Next: `docs/spec/appendix-solana-r.md` (Phase 3)
 
 ---
 
+## Provenance
+
+The Observation Commitment Protocol was publicly released on **April 5, 2026** via ethresear.ch:
+https://ethresear.ch/t/observation-commitment-protocol-ocp-v1-0-0/24602
+
+The core protocol — including both the write side (digest computation, serialization, on-chain submission) and the read side (extraction, verification, proof envelope) — has been part of OCP since v1.0.0. The write side was implemented in the reference CLI (`reference-cli/commit.js`) and the VeraFile application prior to this formal specification. This appendix formalizes what was previously implicit in the implementation.
+
+The full commit history establishing priority is publicly verifiable at:
+https://github.com/damonzwicker/observation-commitment-protocol
+
+Key public timestamps:
+- **April 5, 2026** — OCP v1.0.0 published on ethresear.ch with adversarial falsification challenge
+- **April 13, 2026** — Synchronous composability case study published on ethresear.ch
+- **May 19, 2026** — Proof envelope schema, EVM extraction rule, and zero-dependency verifier committed to main
+- **May 19, 2026** — First external contribution (PR #1, dinamic.eth / ERC-8004) merged
+
+ERC-8263 was filed May 14, 2026. OCP's write-side implementation and public specification predate this filing by over six weeks.
+
+---
+
 ## Scope
 
 This appendix formally specifies both sides of the OCP commitment cycle for EVM-compatible ledgers:
@@ -70,6 +90,8 @@ The digest is emitted as an `indexed` topic, which means it is stored in the tra
 
 This section formally defines how an observation is committed to an EVM ledger. A conformant commitment produces a transaction from which the digest can be independently extracted using the `evm/event-log` rule defined in the Read Side section below.
 
+The write side has been part of OCP since v1.0.0. The reference implementation (`reference-cli/commit.js`) and the VeraFile application both implement this procedure. This section formalizes the specification.
+
 ### Step 1 — Prepare the observation
 
 The observation is any arbitrary byte sequence. No encoding, framing, or transformation is applied before hashing.
@@ -92,7 +114,7 @@ H = SHA-256(observation)
 - Serialization: `raw-bytes` — no length prefix, no framing, no encoding applied
 - Output: 32 bytes
 
-The digest `H` is the canonical representation of the observation. If a single byte of the observation changes, `H` changes. This is the falsifiability guarantee.
+The digest `H` is the canonical representation of the observation. If a single byte of the observation changes, `H` changes. This is the falsifiability guarantee established in OCP v1.0.0.
 
 ### Step 3 — Encode the digest for submission
 
@@ -144,10 +166,10 @@ Once finality depth is reached, construct the OCP proof envelope:
   },
   "ledger_ref": {
     "transaction_id": "<0x-prefixed tx hash>",
-    "block_height": <integer>,
+    "block_height": "<integer>",
     "block_hash": "<0x-prefixed block hash>",
     "finality": {
-      "depth": <integer>,
+      "depth": "<integer>",
       "assertion_time_utc": "<ISO 8601>"
     }
   },
@@ -168,14 +190,16 @@ All `ledger_ref` fields are populated from the transaction receipt returned afte
 
 - Must not apply any encoding, compression, or transformation to the observation before hashing
 - Must not include metadata (filename, timestamp, author) in the hashed data unless those fields are part of the observation by definition
-- Must not submit a digest that was computed from a transformed version of the observation without declaring the transformation in a higher-level layer
+- Must not submit a digest computed from a transformed version of the observation without declaring the transformation in a higher-level layer
 - Must not reuse a proof envelope from a previous commitment for a different observation
 
 ### Relation to ERC-8263
 
-ERC-8263 proposes `anchorProof(bytes32 agentId, bytes32 proofHash)` — a two-field interface that includes agent identity in the commitment call.
+ERC-8263 (filed May 14, 2026) proposes `anchorProof(bytes32 agentId, bytes32 proofHash)` — a two-field interface that includes agent identity in the commitment call.
 
 OCP's `record(bytes32 digest)` is intentionally identity-agnostic. Identity, authorship, and agent binding are explicitly out of scope for OCP — those concerns belong to higher-level layers (e.g., ERC-8004, EIP-712 attestations). OCP commits only the digest.
+
+OCP predates ERC-8263 by over six weeks and specifies both the write side (this section) and the read side (extraction rule and verification procedure below). ERC-8263 specifies only the write side.
 
 The two interfaces are complementary:
 - ERC-8263 binds a proof hash to an agent identity on-chain
@@ -367,5 +391,6 @@ If either condition fails, verification fails. No trust assumptions beyond acces
 
 ---
 
-*Observation Commitment Protocol — docs/spec/appendix-evm-r.md*
+*Observation Commitment Protocol — docs/spec/appendix-evm-r.md*  
+*Original publication: April 5, 2026 — https://ethresear.ch/t/observation-commitment-protocol-ocp-v1-0-0/24602*  
 *github.com/damonzwicker/observation-commitment-protocol*
