@@ -430,13 +430,13 @@ Solana finality is expressed through commitment levels, not block depth.
 
 ## Gate 3 checklist
 
-- [ ] A verifier can extract the digest from a raw Solana devnet transaction without any Solana SDK
-- [ ] The discriminator value can be independently computed from the string `"global:record_commitment"`
-- [ ] The extraction procedure correctly handles transactions with multiple instructions
-- [ ] The slot confirmation step is implemented and tested
-- [ ] The recentBlockhash confirmation step is implemented and tested
-- [ ] At least one real proof envelope has been generated and verified end-to-end against a live Solana devnet transaction
-- [ ] The proof envelope schema required no structural modification for Solana — confirmed
+- [x] A verifier can extract the digest from a raw Solana devnet transaction without any Solana SDK
+- [x] The discriminator value can be independently computed from the string `"global:record_commitment"`
+- [x] The extraction procedure correctly handles transactions with multiple instructions
+- [x] The slot confirmation step is implemented and tested
+- [x] The recentBlockhash confirmation step is implemented and tested
+- [x] At least one real proof envelope has been generated and verified end-to-end against a live Solana devnet transaction
+- [x] The proof envelope schema required no structural modification for Solana — confirmed
 
 ---
 

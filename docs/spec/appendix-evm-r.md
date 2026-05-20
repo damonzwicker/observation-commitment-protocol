@@ -403,3 +403,14 @@ If either condition fails, verification fails. No trust assumptions beyond acces
 *Observation Commitment Protocol — docs/spec/appendix-evm-r.md*  
 *Original publication: April 5, 2026 — https://ethresear.ch/t/observation-commitment-protocol-ocp-v1-0-0/24602*  
 *github.com/damonzwicker/observation-commitment-protocol*
+
+
+---
+
+## Relation to ERC-8263
+
+ERC-8263 (Onchain Proof Layer for AI Agents) specifies a minimal on-chain commitment interface for AI agents. OCP and ERC-8263 are complementary: ERC-8263 defines how a digest is committed on-chain (write side), OCP defines how that digest is independently verified (read side).
+
+OCP standard extraction rule (evm/event-log) targets the OCP reference contract. A separate extraction rule (evm/erc-8263) is being co-authored with Vincent Wu to read proofHash from AnchorProof log entries directly, pending v1 contract deployment on Sepolia.
+
+ERC-8263 specification: https://github.com/ethereum/ERCs/pull/1748

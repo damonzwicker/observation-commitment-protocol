@@ -313,6 +313,7 @@ The network only confirms that a commitment exists.
 - 🤖 AI Inference Attestation → `/docs/spec/appendix-ai-inference-attestation.md`
 - 🧾 Proof Format → `/docs/spec/proof-format-v1.md`
 - 🔍 Examples → `/examples`
+- ✅ Conformance Suite → `/conformance/run-conformance.sh`
 - ⚙️ Contracts → `/contracts`
 - 🌐 Live Demo → https://observation-commitment-protocol.vercel.app/
 
