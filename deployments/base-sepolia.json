@@ -1,0 +1,20 @@
+{
+  "network": "base-sepolia",
+  "chain_id": "eip155:84532",
+  "deployments": [
+    {
+      "contract": "ObservationCommitment",
+      "address": "0x57ce0d3AfB808B50F23ad1550CC5fa9aa9273859",
+      "deployed_at": "2026-04-06",
+      "note": "Original deployment — April 2026. No event emission (predates evm/event-log rule).",
+      "tx": "0x284747d8e6ff559690b3fb548ab5805ac9e96c73775d1ad5b72b83f4a98a8407"
+    },
+    {
+      "contract": "ObservationCommitment",
+      "address": "0x0963Fd33DF80c94360F2DC22e5c09517AeE7ED5c",
+      "deployed_at": "2026-05-19",
+      "note": "Current reference deployment — adds Recorded(bytes32,address) event. Use this address for evm/event-log extraction rule.",
+      "tx": "0x1335b5eb14bc3e6429359860e8accab25a9e3fa96714a01e338c4a1674d0119f"
+    }
+  ]
+}
